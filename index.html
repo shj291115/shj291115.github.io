@@ -224,11 +224,18 @@
     .project, .stack li, .certs li { break-inside: avoid; }
   }
 
+  /* 스크린샷: 한 줄에 2장, 모든 칸을 같은 비율(16:9)로 */
+  .shots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .shot {
-  max-width: 100%;   /* 칸보다 커지지 않음 (모바일에서 안 넘침) */
-  width: 480px;      /* 원하는 크기 */
-  height: auto;      /* 비율 유지 */
-  border: 1px solid var(--line);
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;      /* 칸 모양 통일 */
+    object-fit: contain;       /* 잘리지 않게 칸 안에 통째로 넣기 */
+    background: var(--bg);     /* 남는 여백 색 */
+    border: 1px solid var(--line);
+  }
+  @media (max-width: 760px) {
+    .shots { grid-template-columns: 1fr; }   /* 폰에서는 1장씩 */
   }
 </style>
 </head>
@@ -252,8 +259,7 @@
     <dl class="contact">
       <div>
         <dt>EMAIL</dt>
-        <!-- TODO: 이메일 주소를 넣고 아래 span을 <a href="mailto:주소">주소</a> 로 바꾸기 -->
-        <dd><a href= "shj291115@gmail.com">shj291115@gmail.com</a></dd>
+        <dd><a href="mailto:shj291115@gmail.com">shj291115@gmail.com</a></dd>
       </div>
       <div>
         <dt>소속</dt>
@@ -314,6 +320,7 @@
         <span class="num">03</span>
         <h2>프로젝트</h2>
       </div>
+      
       <div class="content">
 
         <article class="project">
@@ -322,26 +329,30 @@
             <h3>CommunityHub</h3>
             <p class="one">이메일 인증 회원가입, 실시간 대화, 날씨 표시를 갖춘 커뮤니티 웹 애플리케이션</p>
           </header>
+          
           <dl class="meta">
             <div>
               <dt>작업 기간</dt>
-              <!-- TODO: 작업 기간 입력 (예: 2026.09 ~ 2026.11) -->
-              <dd><span class="todo">입력 필요 · 기간</span></dd>
+              <dd>2026-10-01 - 2026-11-1</dd>
             </div>
+            
             <div>
               <dt>진행 형태</dt>
               <dd>개인 프로젝트 (1인)</dd>
             </div>
+            
             <div>
               <dt>사용 기술</dt>
               <dd>C# · ASP.NET Core · SignalR</dd>
             </div>
           </dl>
+          
           <div class="body">
             <div>
               <h3 class="sub">개요</h3>
               <p>ASP.NET Core로 만든 커뮤니티 웹 애플리케이션입니다. 회원가입에 이메일 인증을 붙였고, SignalR 라이브러리로 실시간 대화 기능을 구현했으며, 날씨 정보를 화면에 보여 줍니다.</p>
             </div>
+            
             <div>
               <h3 class="sub">주요 기능</h3>
               <ul class="features">
@@ -350,15 +361,17 @@
                 <li><b>날씨 표시</b><span>날씨 정보를 받아 페이지에 표시합니다.</span></li>
               </ul>
             </div>
+            
             <div>
               <h3 class="sub">추가 정보</h3>
-              <!-- TODO: GitHub 저장소 주소나 스크린샷이 있으면 여기에 추가. 없으면 이 블록 삭제 -->
-              <img class="shot" src="images/chub.png" alt="CommunityHubImage">
-              <img class="shot" src="images/chub1.png" alt="CommunityHubImage1">
-              <img class="shot" src="images/chub2.png" alt="CommunityHubImage2">
-              <img class="shot" src="images/chub3.png" alt="CommunityHubImage3">
-              <img class="shot" src="images/chub4.png" alt="CommunityHubImage4">
-              <img class="shot" src="images/chub5.png" alt="CommunityHubImage5">
+              <div class="shots">
+                <img class="shot" src="Images/chub.png" alt="CommunityHub 화면 1">
+                <img class="shot" src="Images/chub1.png" alt="CommunityHub 화면 2">
+                <img class="shot" src="Images/chub2.png" alt="CommunityHub 화면 3">
+                <img class="shot" src="Images/chub3.png" alt="CommunityHub 화면 4">
+                <img class="shot" src="Images/chub4.png" alt="CommunityHub 화면 5">
+                <img class="shot" src="Images/chub5.png" alt="CommunityHub 화면 6">
+              </div>
             </div>
           </div>
         </article>
@@ -369,11 +382,11 @@
             <h3>하스스톤 모작</h3>
             <p class="one">Unity로 만든 로컬 플레이 카드 게임</p>
           </header>
+          
           <dl class="meta">
             <div>
               <dt>작업 기간</dt>
-              <!-- TODO: 작업 기간 입력 -->
-              <dd><span class="todo">입력 필요 · 기간</span></dd>
+              <dd>2025-02-01 - 2026-06-31</dd>
             </div>
             <div>
               <dt>진행 형태</dt>
@@ -384,6 +397,7 @@
               <dd>Unity · C#</dd>
             </div>
           </dl>
+          
           <div class="body">
             <div>
               <h3 class="sub">개요</h3>
@@ -392,7 +406,6 @@
             <p class="note">현재 프로젝트 파일이 삭제되어 소스 코드와 실행 화면은 남아 있지 않습니다.</p>
           </div>
         </article>
-
       </div>
     </div>
   </section>
@@ -406,3 +419,4 @@
 
 </body>
 </html>
+
