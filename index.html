@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>손호성 포트폴리오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* Layout idea: an editor scene. The name sits on a scene grid like a selected
+     object; below it, three numbered sections follow the assignment's required
+     items (01 이름·연락처, 02 전공, 03 프로젝트) in a label column + content column. */
+  :root {
+    --bg: #F2F4F7;
+    --surface: #FFFFFF;
+    --ink: #131C26;
+    --muted: #5A6775;
+    --line: #D3DAE2;
+    --grid: rgba(19, 28, 38, 0.07);
+    --accent: #5B3FD6;
+    --accent-soft: rgba(91, 63, 214, 0.09);
+    --font-display: "Black Han Sans", "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+    --font-mono: "IBM Plex Mono", "D2Coding", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #0F1419;
+      --surface: #171E26;
+      --ink: #E7ECF1;
+      --muted: #94A1AE;
+      --line: #2A3540;
+      --grid: rgba(231, 236, 241, 0.06);
+      --accent: #A897FF;
+      --accent-soft: rgba(168, 151, 255, 0.12);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0F1419;
+    --surface: #171E26;
+    --ink: #E7ECF1;
+    --muted: #94A1AE;
+    --line: #2A3540;
+    --grid: rgba(231, 236, 241, 0.06);
+    --accent: #A897FF;
+    --accent-soft: rgba(168, 151, 255, 0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.75;
+    word-break: keep-all;
+    overflow-wrap: anywhere;
+  }
+  h1, h2, h3, p, dl, dd, ul { margin: 0; padding: 0; }
+  ul { list-style: none; }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px; }
+  .mono {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; padding: 28px 0 72px; border-bottom: 1px solid var(--line); }
+  .hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 32px 32px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent 100%);
+            mask-image: linear-gradient(to bottom, #000 35%, transparent 100%);
+    pointer-events: none;
+  }
+  .hero .wrap { position: relative; display: flex; flex-direction: column; gap: 40px; }
+  .topline { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+
+  .selection {
+    position: relative;
+    align-self: flex-start;
+    margin-top: 28px;
+    padding: 18px 28px 8px;
+    border: 1.5px solid var(--accent);
+    background: var(--accent-soft);
+  }
+  .selection .tag {
+    position: absolute; left: -1.5px; bottom: 100%;
+    padding: 3px 10px;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+  }
+  .selection i {
+    position: absolute; width: 9px; height: 9px;
+    background: var(--bg); border: 1.5px solid var(--accent);
+  }
+  .selection i:nth-of-type(1) { left: -5px;  top: -5px; }
+  .selection i:nth-of-type(2) { right: -5px; top: -5px; }
+  .selection i:nth-of-type(3) { left: -5px;  bottom: -5px; }
+  .selection i:nth-of-type(4) { right: -5px; bottom: -5px; }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(64px, 15vw, 148px);
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+  }
+
+  .thesis {
+    max-width: 21em;
+    font-size: clamp(20px, 2.9vw, 27px);
+    font-weight: 600;
+    line-height: 1.5;
+    text-wrap: balance;
+  }
+  .thesis em { font-style: normal; color: var(--accent); }
+
+  .contact { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); }
+  .contact div { padding: 16px 20px 0 0; }
+  .contact dt { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.06em; color: var(--muted); }
+  .contact dd { font-weight: 500; }
+
+  /* ---------- Sections ---------- */
+  section.block { padding: 72px 0; border-bottom: 1px solid var(--line); }
+  section.block .wrap { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 24px 40px; }
+  .label { display: flex; flex-direction: column; gap: 6px; align-self: start; }
+  .label .num { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.06em; color: var(--accent); }
+  .label h2 { font-size: 20px; font-weight: 600; line-height: 1.4; }
+  .content { display: flex; flex-direction: column; gap: 36px; }
+  .lead { max-width: 36em; font-size: 17px; }
+
+  h3.sub {
+    font-family: var(--font-mono);
+    font-size: 12.5px; font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .stack { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .stack li { background: var(--surface); border: 1px solid var(--line); padding: 16px 18px; }
+  .stack .area { font-size: 13.5px; color: var(--muted); }
+  .stack .tools { font-weight: 600; font-size: 17px; line-height: 1.5; }
+
+  .certs { border-top: 1px solid var(--line); }
+  .certs li { display: flex; align-items: baseline; gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--line); }
+  .certs .n { font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .certs .name { font-weight: 500; }
+
+  /* ---------- Projects ---------- */
+  .project { background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--accent); }
+  .project > * { padding-left: 28px; padding-right: 28px; }
+  .project header { padding-top: 26px; padding-bottom: 22px; display: flex; flex-direction: column; gap: 6px; }
+  .kind { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.06em; color: var(--accent); }
+  .project header h3 { font-family: var(--font-display); font-weight: 400; font-size: clamp(28px, 4.4vw, 38px); line-height: 1.2; letter-spacing: 0.01em; }
+  .project .one { color: var(--muted); }
+
+  .meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-top: 0; padding-bottom: 0; }
+  .meta div { padding: 14px 16px 14px 0; }
+  .meta div + div { padding-left: 16px; border-left: 1px solid var(--line); }
+  .meta dt { font-size: 13px; color: var(--muted); }
+  .meta dd { font-weight: 500; }
+
+  .body { padding-top: 24px; padding-bottom: 28px; display: flex; flex-direction: column; gap: 26px; }
+  .body p { max-width: 36em; }
+  .features { display: grid; gap: 14px; }
+  .features li { display: grid; grid-template-columns: 9.5em minmax(0, 1fr); gap: 4px 16px; }
+  .features b { font-weight: 600; }
+  .features span { color: var(--muted); }
+  .note { border-left: 3px solid var(--line); padding-left: 14px; color: var(--muted); font-size: 15px; }
+
+  .todo {
+    display: inline-block;
+    padding: 1px 9px;
+    border: 1px dashed var(--accent);
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  footer { padding: 28px 0 44px; }
+
+  @media (max-width: 760px) {
+    .hero { padding-bottom: 52px; }
+    .contact, .stack, .meta { grid-template-columns: 1fr; }
+    .contact div { padding-right: 0; }
+    .meta div { padding: 12px 0; }
+    .meta div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+    section.block { padding: 52px 0; }
+    section.block .wrap { grid-template-columns: 1fr; }
+    .project > * { padding-left: 20px; padding-right: 20px; }
+    .features li { grid-template-columns: 1fr; }
+    .selection { padding: 14px 18px 6px; }
+  }
+
+  @media print {
+    :root, :root[data-theme="dark"], :root:not([data-theme="light"]) {
+      color-scheme: light;
+      --bg: #FFFFFF; --surface: #FFFFFF; --ink: #131C26; --muted: #5A6775;
+      --line: #D3DAE2; --accent: #5B3FD6; --accent-soft: rgba(91, 63, 214, 0.06);
+    }
+    .hero::before { display: none; }
+    .hero { padding-bottom: 40px; }
+    section.block { padding: 36px 0; }
+    .project, .stack li, .certs li { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="topline">
+      <span class="mono">PORTFOLIO</span>
+      <span class="mono">영진전문대학교 컴퓨터정보계열</span>
+    </div>
+
+    <div class="selection">
+      <span class="tag">01 이름 · 연락처</span>
+      <i></i><i></i><i></i><i></i>
+      <h1>손호성</h1>
+    </div>
+
+    <p class="thesis">게임은 Unity로, 웹은 ASP.NET Core로 만듭니다. 두 작업 모두 <em>C#</em>으로 합니다.</p>
+
+    <dl class="contact">
+      <div>
+        <dt>EMAIL</dt>
+        <!-- TODO: 이메일 주소를 넣고 아래 span을 <a href="mailto:주소">주소</a> 로 바꾸기 -->
+        <dd><span class="todo">입력 필요 · 이메일 주소</span></dd>
+      </div>
+      <div>
+        <dt>소속</dt>
+        <dd>영진전문대학교 컴퓨터정보계열</dd>
+      </div>
+      <div>
+        <dt>전공</dt>
+        <dd>게임메타버스</dd>
+      </div>
+    </dl>
+  </div>
+</header>
+
+<main>
+  <section class="block" id="major">
+    <div class="wrap">
+      <div class="label">
+        <span class="num">02</span>
+        <h2>전공 · 전문 분야</h2>
+      </div>
+      <div class="content">
+        <p class="lead">영진전문대학교 컴퓨터정보계열에서 게임메타버스를 전공하고 있습니다. Unity와 C#으로 게임 콘텐츠를 만드는 것을 중심으로 공부하고, 같은 C#을 쓰는 ASP.NET Core와 EF Core, MySQL로 웹 서비스와 데이터베이스까지 다룹니다. 리눅스, 네트워크, SQL 자격증을 준비하면서 서버를 운영하는 데 필요한 기초도 함께 쌓았습니다.</p>
+
+        <div>
+          <h3 class="sub">사용 기술</h3>
+          <ul class="stack">
+            <li>
+              <div class="area">게임</div>
+              <div class="tools">Unity · C#</div>
+            </li>
+            <li>
+              <div class="area">웹</div>
+              <div class="tools">ASP.NET Core · EF Core</div>
+            </li>
+            <li>
+              <div class="area">데이터베이스</div>
+              <div class="tools">MySQL</div>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="sub">자격증</h3>
+          <ul class="certs">
+            <li><span class="n">1</span><span class="name">정보처리산업기사</span></li>
+            <li><span class="n">2</span><span class="name">SQLD (SQL 개발자)</span></li>
+            <li><span class="n">3</span><span class="name">리눅스마스터 2급</span></li>
+            <li><span class="n">4</span><span class="name">네트워크관리사 2급</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="projects">
+    <div class="wrap">
+      <div class="label">
+        <span class="num">03</span>
+        <h2>프로젝트</h2>
+      </div>
+      <div class="content">
+
+        <article class="project">
+          <header>
+            <span class="kind">개인 프로젝트 · 웹</span>
+            <h3>CommunityHub</h3>
+            <p class="one">이메일 인증 회원가입, 실시간 대화, 날씨 표시를 갖춘 커뮤니티 웹 애플리케이션</p>
+          </header>
+          <dl class="meta">
+            <div>
+              <dt>작업 기간</dt>
+              <!-- TODO: 작업 기간 입력 (예: 2026.09 ~ 2026.11) -->
+              <dd><span class="todo">입력 필요 · 기간</span></dd>
+            </div>
+            <div>
+              <dt>진행 형태</dt>
+              <dd>개인 프로젝트 (1인)</dd>
+            </div>
+            <div>
+              <dt>사용 기술</dt>
+              <dd>C# · ASP.NET Core · SignalR</dd>
+            </div>
+          </dl>
+          <div class="body">
+            <div>
+              <h3 class="sub">개요</h3>
+              <p>ASP.NET Core로 만든 커뮤니티 웹 애플리케이션입니다. 회원가입에 이메일 인증을 붙였고, SignalR 라이브러리로 실시간 대화 기능을 구현했으며, 날씨 정보를 화면에 보여 줍니다.</p>
+            </div>
+            <div>
+              <h3 class="sub">주요 기능</h3>
+              <ul class="features">
+                <li><b>이메일 인증 회원가입</b><span>가입할 때 입력한 이메일로 인증을 마쳐야 계정이 만들어집니다.</span></li>
+                <li><b>실시간 대화</b><span>SignalR을 사용해 페이지를 새로 고치지 않아도 메시지가 바로 전달됩니다.</span></li>
+                <li><b>날씨 표시</b><span>날씨 정보를 받아 페이지에 표시합니다.</span></li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="sub">추가 정보</h3>
+              <!-- TODO: GitHub 저장소 주소나 스크린샷이 있으면 여기에 추가. 없으면 이 블록 삭제 -->
+              <p><span class="todo">입력 필요 · GitHub 링크 또는 스크린샷</span></p>
+            </div>
+          </div>
+        </article>
+
+        <article class="project">
+          <header>
+            <span class="kind">개인 프로젝트 · 게임</span>
+            <h3>하스스톤 모작</h3>
+            <p class="one">Unity로 만든 로컬 플레이 카드 게임</p>
+          </header>
+          <dl class="meta">
+            <div>
+              <dt>작업 기간</dt>
+              <!-- TODO: 작업 기간 입력 -->
+              <dd><span class="todo">입력 필요 · 기간</span></dd>
+            </div>
+            <div>
+              <dt>진행 형태</dt>
+              <dd>개인 프로젝트 (1인)</dd>
+            </div>
+            <div>
+              <dt>사용 기술</dt>
+              <dd>Unity · C#</dd>
+            </div>
+          </dl>
+          <div class="body">
+            <div>
+              <h3 class="sub">개요</h3>
+              <p>카드 게임 하스스톤을 참고해 Unity와 C#으로 만든 모작입니다. 네트워크 연결 없이 로컬에서 플레이하는 형태로 제작했습니다.</p>
+            </div>
+            <p class="note">현재 프로젝트 파일이 삭제되어 소스 코드와 실행 화면은 남아 있지 않습니다.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="mono">손호성 · 영진전문대학교 컴퓨터정보계열 게임메타버스</span>
+  </div>
+</footer>
+
+</body>
+</html>
