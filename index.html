@@ -223,6 +223,13 @@
     section.block { padding: 36px 0; }
     .project, .stack li, .certs li { break-inside: avoid; }
   }
+
+  .shot {
+  max-width: 100%;   /* 칸보다 커지지 않음 (모바일에서 안 넘침) */
+  width: 480px;      /* 원하는 크기 */
+  height: auto;      /* 비율 유지 */
+  border: 1px solid var(--line);
+  }
 </style>
 </head>
 <body>
@@ -246,7 +253,7 @@
       <div>
         <dt>EMAIL</dt>
         <!-- TODO: 이메일 주소를 넣고 아래 span을 <a href="mailto:주소">주소</a> 로 바꾸기 -->
-        <dd><span class="todo">입력 필요 · 이메일 주소</span></dd>
+        <dd><a href= "shj291115@gmail.com">shj291115@gmail.com</a></dd>
       </div>
       <div>
         <dt>소속</dt>
@@ -346,7 +353,13 @@
             <div>
               <h3 class="sub">추가 정보</h3>
               <!-- TODO: GitHub 저장소 주소나 스크린샷이 있으면 여기에 추가. 없으면 이 블록 삭제 -->
-              <p><span class="todo">입력 필요 · GitHub 링크 또는 스크린샷</span></p>
+              <img class="shot" src="images/chub.png" alt="CommunityHubImage">
+              <img class="shot" src="images1/chub.png" alt="CommunityHubImage">
+              <img class="shot" src="images2/chub.png" alt="CommunityHubImage">
+              <img class="shot" src="images3/chub.png" alt="CommunityHubImage">
+              <img class="shot" src="images4/chub.png" alt="CommunityHubImage">
+              <img class="shot" src="images5/chub.png" alt="CommunityHubImage">
+              <img class="shot" src="images6/chub.png" alt="CommunityHubImage">
             </div>
           </div>
         </article>
